@@ -28,14 +28,14 @@
 
 # Default compiler is Intel MPI compiler
 
-COMPILER := mpicc
+COMPILER := mpic++
 UBUNTU   := ubuntu
 
 # Change if on ubuntu
 
-ifeq ($(strip $(LOGNAME)),scott)
-COMPILER := mpic++ 
-endif
+#ifeq ($(strip $(LOGNAME)),scott)
+#COMPILER := mpic++
+#endif
 
 # -----------------------------------------------------
 # Make solvers
