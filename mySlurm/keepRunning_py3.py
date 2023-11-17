@@ -76,18 +76,18 @@ def FatalError(msg):
 # ==
 
 
-def runDone(ttyFile,completionIndicator):
+def runDone(ttyFile,completionIndicator = "Execution Completed Successfully\n"):
 
     try:
         f = open(ttyFile,'r')
     except:
         print("tty file ("+ttyFile+")not found.  Assuming the job is not still running...")
-        # TO-DO
+        return False
     
     for line in f:
         if completionIndicator in line:
             f.close()
-            # TO-DO
+            return True
 
     f.close()
     return False
@@ -190,15 +190,15 @@ def keepRunning(argv):
             
         
         if len(jobStatus) > 0:
-            print ('#### TO-DO ####')
+            print ('#### Still running, standby ####')
         else:
             print ('It is no longer running.   Checking its tty output to see if it finished.')
             if runDone(ttyOutput,completionStr):
                 print ('It did finish.  This script (keepRunning.py) is now exiting.')
-                # TO-DO #
+                os.exit(0)
             else:
                 print ('It is no longer running.   Restarting it now...')
-                # TO-DO #
+                os.system(restartCommand + "&")
 
         time.sleep(1)
 

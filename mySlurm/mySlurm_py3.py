@@ -157,8 +157,8 @@ def mySlurm(argv):
 
         count += 1
 
-        userName = # TO-DO 
-        jobName = # TO-DO
+        userName = os.popen("whoami").read()
+        jobName = "./transientDiffusion"
     
         print
         print ('Iteration             : ' + str(count))
