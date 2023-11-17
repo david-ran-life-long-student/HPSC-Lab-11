@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
        if ( !strcmp(argv[count],"-tEnd"    ) ) tEnd    = atof(argv[count+1]);
        if ( !strcmp(argv[count],"-dt"      ) ) dt      = atof(argv[count+1]);
        if ( !strcmp(argv[count],"-tPlot"   ) ) tPlot   = atof(argv[count+1]);
-       if ( !strcmp(argv[count],"-restart" ) ) restart = 1;                  // <-----  TO-DO:  Make special note of this
+       if ( !strcmp(argv[count],"-restart" ) ) restart = 1;
      }
 
    // -
@@ -95,7 +95,7 @@ int main(int argc, char *argv[])
        cout << "End Time                : " << tEnd    << endl;
        cout << "Time Step               : " << dt      << endl;
        cout << "Plot Interval           : " << tPlot   << endl;
-       cout << "This is a restart (1/0) : " << restart << endl;               // <-----  TO-DO:  Make special note of this
+       cout << "This is a restart (1/0) : " << restart << endl;
        cout << endl;
      }
 
@@ -133,7 +133,7 @@ int main(int argc, char *argv[])
    if ( restart )
      {
        MPI_Barrier(MPI_COMM_WORLD);
-       /* TO-DO  (read restart file)  */ 
+       MESH.readRestart(tStart, dt, timeSinceLastPlot, nCellx, nCelly, count, solver, myMPI);
      }
 
    for ( double time = tStart ; time <= tEnd ; time += dt )
@@ -164,7 +164,7 @@ int main(int argc, char *argv[])
 	   timeSinceLastPlot = 0.;
 	   
 	   MPI_Barrier(MPI_COMM_WORLD);
-	   /* TO-DO (write restart file) */
+	   MESH.writeRestart(time, dt, timeSinceLastPlot, nCellx, nCelly, count, solver, myMPI);
 
 	   ++count;
 	 }
