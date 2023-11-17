@@ -133,7 +133,7 @@ def mySlurm(argv):
             sys.exit()
             
         elif opt == "-f":
-            inputFile  = arg
+            inputFile  = arg  # TODO: why input file
             
         elif opt == "-t":
             maxTime = float(arg)
@@ -158,14 +158,15 @@ def mySlurm(argv):
         count += 1
 
         userName = os.popen("whoami").read()
-        jobName = "./transientDiffusion"
+        userName = userName.replace('\n', ' ')
+        jobName = "transientDiffusion"
     
         print
         print ('Iteration             : ' + str(count))
         print ('Searching for this job: ' + jobName )
         print ('Under user name       : ' + userName)
 
-        psCommand = "ps -elf | grep " + userName + " | grep " + jobName + " | grep -v 'grep' "
+        psCommand = "ps -elf | grep " + userName + " | grep " + jobName + " | grep -v 'grep' | grep -v '.py'"
         jobStatus = os.popen(psCommand).read()
         
         if len(jobStatus) <= 0:

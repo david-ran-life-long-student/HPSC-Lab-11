@@ -65,7 +65,7 @@ void writeRestart(double &time             ,
    //    [2] An integer reflection the choice of linear solver
    //    [3] The number of plots files already written
    
-   headerInts[0] = nCellx * myMPI.nPEx;   // TODO: Ask Scott about whether this mesh has overlap
+   headerInts[0] = nCellx * myMPI.nPEx;   // TODO: Ask about whether this mesh has overlap
    headerInts[1] = nCelly * myMPI.nPEy;
    
    if ( solver == "jacobi" ) headerInts[2] = 1;   

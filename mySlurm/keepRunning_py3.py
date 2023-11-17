@@ -177,7 +177,8 @@ def keepRunning(argv):
         print('Checking on        : ' + exe )
         print
 
-        userName = 'scott'
+        userName = os.popen("whoami").read()
+        userName = userName.replace('\n', ' ')
         jobName = exe
     
         psCommand = "ps -elf | grep " + userName + " | grep " + jobName + " | grep -v 'grep' "
@@ -195,7 +196,7 @@ def keepRunning(argv):
             print ('It is no longer running.   Checking its tty output to see if it finished.')
             if runDone(ttyOutput,completionStr):
                 print ('It did finish.  This script (keepRunning.py) is now exiting.')
-                os.exit(0)
+                sys.exit(0)
             else:
                 print ('It is no longer running.   Restarting it now...')
                 os.system(restartCommand + "&")
